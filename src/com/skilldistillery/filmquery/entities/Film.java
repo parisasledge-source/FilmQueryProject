@@ -15,7 +15,10 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
-
+	
+	private List<Actor> actors;
+	
+	
 	public Film() {
 		super();
 	}
@@ -125,6 +128,27 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 	}
 
+	
+
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
+	}
+
+	public void setReleaseYear(Integer releaseYear) {
+		this.releaseYear = releaseYear;
+	}
+
+	public void setRantalRate(double rantalRate) {
+		this.rantalRate = rantalRate;
+	}
+
+	public void setLength(Integer length) {
+		this.length = length;
+	}
 
 	@Override
 	public int hashCode() {

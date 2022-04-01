@@ -25,7 +25,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			String sql = "SELECT id, title, description, release_year, language_id,"
 					+ " rental_duration, rental_rate, length, replacement_cost," + " rating, special_features "
-					+ "FROM film WHERE id = ?";
+					+ " FROM film WHERE id = ?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
@@ -43,6 +43,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacementCost(rs.getDouble("replacement_cost"));
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
+				film.setActors(findActorsByFilmId(filmId));
 			}
 			rs.close();
 			stmt.close();
@@ -61,14 +62,14 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
-			String sql = "SELECT id, first_name, last_name" + "FROM film WHERE id = ?";
+			String sql = "SELECT id, first_name, last_name" + " FROM actor WHERE id = ?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, actorId);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				actor = new Actor();
-				actor.setId(rs.getInt(1));
+				actor.setId(rs.getInt("id"));
 				actor.setFirstName(rs.getString("first_name"));
 				actor.setLastName(rs.getString("last_name"));
 			
@@ -88,6 +89,33 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		// TODO Auto-generated method stub
 		List<Actor> actors = new ArrayList<>();
 		// TODO: Actor query for film ID
+		
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			String sql = "SELECT id, first_name, last_name "
+					+ "FROM actor JOIN film_actor ON actor.id = film_actor.actor_id "
+					+ "WHERE film_actor.film_id = ?;";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				Actor actor = new Actor();
+				actor.setId(rs.getInt("id"));
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
+				actors.add(actor);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		//return actor;
+		
+		
 		// 		Instantiate new Actor for each rs row,
 		// 		add to actors List. 
 		return actors;
