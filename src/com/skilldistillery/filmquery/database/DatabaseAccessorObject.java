@@ -120,6 +120,34 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		// 		add to actors List. 
 		return actors;
 	}
+	
+	@Override
+	public String findLanguageByFilmId(int filmId) {
+	
+		String languageName = null;
+		
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			String sql = "SELECT l.name FROM language l JOIN film f ON l.id = f.language_id WHERE f.id = ?;";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				languageName = rs.getString("name");
+		
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return languageName;
+	}
 
 	static {
 		try {

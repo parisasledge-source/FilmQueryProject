@@ -31,6 +31,10 @@ public class FilmQueryApp {
 			System.out.println(a);
 		}
 		
+		
+		String language = db.findLanguageByFilmId(7);
+		System.out.println(language);
+		
 	}
 
 	private void launch() {
