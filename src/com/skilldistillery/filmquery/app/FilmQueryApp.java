@@ -19,13 +19,13 @@ public class FilmQueryApp {
 	}
 
 	private void test() {
-		Film film = db.findFilmById(1);
-		Actor actor = db.findActorById(2);
+		Film film = db.findFilmById(7);
+		//Actor actor = db.findActorById(2);
 		System.out.println(film);
-		System.out.println(actor);
-		List<Actor> actors = db.findActorsByFilmId(1);
-		System.out.println(actor);
-		System.out.println(film.getActors());
+		//System.out.println(actor);
+//		List<Actor> actors = db.findActorsByFilmId(2);
+//		System.out.println(actor);
+//		System.out.println(film.getActors());
 		
 		for (Actor a : film.getActors()) {
 			System.out.println(a);
