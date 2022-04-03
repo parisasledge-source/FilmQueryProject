@@ -54,26 +54,22 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		return film;
 	}
-
 //	@Override
-//	public List<Film> findFilmBySearchKeyword(String keyword) {
-//		List<Film> films = new ArrayList<>();
-//
+//	public Film findFilmByText(String text) {
+//		Film film = null;
+//		
 //		try {
 //			Connection conn = DriverManager.getConnection(URL, user, pass);
-//			//String sql = "SELECT title, description FROM film WHERE title LIKE ? OR description LIKE ?";
-//			
 //			String sql = "SELECT id, title, description, release_year, language_id,"
 //					+ " rental_duration, rental_rate, length, replacement_cost," + " rating, special_features "
-//					+ " FROM film WHERE title LIKE ? OR description LIKE ?";
-//
+//					+ " FROM film WHERE title = ?";
+//			
 //			PreparedStatement stmt = conn.prepareStatement(sql);
-//			stmt.setString(1, "%" + keyword + "%");
-//			stmt.setString(2, "%" + keyword + "%");
+//			stmt.setString(1, text);
 //			ResultSet rs = stmt.executeQuery();
-//			while (rs.next()) {
-//				Film film = new Film();
-//				film.setId(rs.getInt("id"));
+//			if (rs.next()) {
+//				film = new Film();
+//				film.setId(rs.getInt(1));
 //				film.setTitle(rs.getString("title"));
 //				film.setDescription(rs.getString("description"));
 //				film.setReleaseYear(rs.getInt("release_year"));
@@ -84,9 +80,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 //				film.setReplacementCost(rs.getDouble("replacement_cost"));
 //				film.setRating(rs.getString("rating"));
 //				film.setSpecialFeatures(rs.getString("special_features"));
-//				films.add(film);
-//				
-//				//film.setActors(findActorsByFilmId(filmId));
+//				film.setActors2(findFilmBySearchKeyword(text));
 //			}
 //			rs.close();
 //			stmt.close();
@@ -95,9 +89,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 //			e.printStackTrace();
 //		}
 //		
-//		return films;
+//		return film;
 //	}
-	
+
+
 	@Override
 	public List<Film> findFilmBySearchKeyword(String keyword) {
 		// TODO Auto-generated method stub
@@ -125,6 +120,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacementCost(rs.getDouble("replacement_cost"));
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
+				film.setActors(findActorsByFilmId(film.getId()));
+				film.setLanguage(findLanguageByFilmId(film.getId()));
 				films.add(film);
 
 			}

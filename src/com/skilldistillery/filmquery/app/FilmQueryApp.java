@@ -28,21 +28,39 @@ public class FilmQueryApp {
 //		System.out.println(actor);
 //		System.out.println(film.getActors());
 		
-		for (Actor a : film.getActors()) {
-			System.out.println(a);
-		}
-		
-		
 		String language = db.findLanguageByFilmId(4);
 		System.out.println(language);
+		
+		for (Actor actors : film.getActors()) {
+			System.out.println(actors);
+		}
+		System.out.println();
+		
 		
 		//=======================================
 		//film = db.findFilmBySearchKeyword("IDE");
 		
-		List<Film> film2 = db.findFilmBySearchKeyword("santa");
+		//Film film = null;
+		//film = db.findFilmByText("santa paris");
+		//System.out.println(film);
+		
+		List<Film> film2 = db.findFilmBySearchKeyword("SANTA");
 		for (Film b : film2) {
-			System.out.println(film2);
+			System.out.println(b.getTitle());
+			System.out.println(b.getLanguage());
+			
+			for (Actor actors : b.getActors()) {
+				System.out.println(actors);
+			}
+			System.out.println();
+			
 		}
+		
+		//language = db.findLanguageByFilmId(4);
+//		System.out.println();
+//		for (Actor actors : film.getActors()) {
+//			System.out.println(actors);
+//		}
 		
 	}
 
@@ -77,16 +95,17 @@ public class FilmQueryApp {
 				int filmId = input.nextInt();
 				System.out.println("======================");
 				
-				Film film = null;
-				film = db.findFilmById(filmId);
+				Film film = db.findFilmById(filmId);
 				System.out.println(film);
-				for (Actor a : film.getActors()) {
-					System.out.println(a);
-				}
-				
 				
 				String language = db.findLanguageByFilmId(4);
 				System.out.println(language);
+				
+				for (Actor actors : film.getActors()) {
+					System.out.println(actors);
+				}
+				
+				
 			}
 			else if (menuInput == 2) {
 				

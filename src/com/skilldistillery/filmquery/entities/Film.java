@@ -15,6 +15,7 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
+	private String language;
 	
 	private List<Actor> actors;
 	
@@ -24,7 +25,7 @@ public class Film {
 	}
 
 	public Film(int id, String title, String description, int releaseYear, int languageID, int rentalDuration,
-			Double rantalRate, int length, double replacementCost, String rating, String specialFeatures,
+			Double rantalRate, int length, double replacementCost, String rating, String specialFeatures, String language,
 			List<Film> films) {
 		super();
 		this.id = id;
@@ -38,6 +39,7 @@ public class Film {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
+		this.language =language;
 	}
 
 	public int getId() {
@@ -140,6 +142,14 @@ public class Film {
 	
 	
 
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
 	public void setReleaseYear(Integer releaseYear) {
 		this.releaseYear = releaseYear;
 	}
@@ -180,5 +190,10 @@ public class Film {
 				.append(specialFeatures).append("]");
 		return builder.toString();
 	}
+
+//	public void setActors2(List<Film> findFilmBySearchKeyword) {
+//		// TODO Auto-generated method stub
+//		this.actors = actors;
+//	}
 
 }
