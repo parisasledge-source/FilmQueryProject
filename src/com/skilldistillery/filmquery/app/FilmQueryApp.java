@@ -19,21 +19,27 @@ public class FilmQueryApp {
 	}
 
 	private void test() {
-		Film film = db.findFilmById(7);
+		Film film = null;
+		//film = db.findFilmById(4);
 		//Actor actor = db.findActorById(2);
-		System.out.println(film);
+		//System.out.println(film);
 		//System.out.println(actor);
 //		List<Actor> actors = db.findActorsByFilmId(2);
 //		System.out.println(actor);
 //		System.out.println(film.getActors());
 		
-		for (Actor a : film.getActors()) {
-			System.out.println(a);
-		}
+		//for (Actor a : film.getActors()) {
+			//System.out.println(a);
+		//}
 		
 		
-		String language = db.findLanguageByFilmId(7);
-		System.out.println(language);
+		//String language = db.findLanguageByFilmId(4);
+		//System.out.println(language);
+		
+		//=======================================
+		film = db.findFilmBySearchKeyword("IDE");
+		System.out.println(film);
+		
 		
 	}
 
