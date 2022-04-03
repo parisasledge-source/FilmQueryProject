@@ -56,19 +56,23 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	@Override
-	public Film findFilmBySearchKeyword(String keyword) {
-		Film film = null;
+	public List<Film> findFilmBySearchKeyword(String keyword) {
+		List<Film> films = new ArrayList<>();
 
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
-			String sql = "SELECT title, description FROM film WHERE title LIKE ? OR description LIKE ?";
+			//String sql = "SELECT title, description FROM film WHERE title LIKE ? OR description LIKE ?";
+			
+			String sql = "SELECT id, title, description, release_year, language_id,"
+					+ " rental_duration, rental_rate, length, replacement_cost," + " rating, special_features "
+					+ " FROM film WHERE title LIKE ? OR description LIKE ?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, keyword);
-			stmt.setString(2, keyword);
+			stmt.setString(1, "%" + keyword + "%");
+			stmt.setString(2, "%" + keyword + "%");
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
-				film = new Film();
+			while (rs.next()) {
+				Film film = new Film();
 				film.setId(rs.getInt(1));
 				film.setTitle(rs.getString("title"));
 				film.setDescription(rs.getString("description"));
@@ -80,6 +84,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacementCost(rs.getDouble("replacement_cost"));
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
+				films.add(film);
+				
 				//film.setActors(findActorsByFilmId(filmId));
 			}
 			rs.close();
@@ -89,7 +95,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			e.printStackTrace();
 		}
 		
-		return film;
+		return films;
 	}
 	
 	@Override

@@ -8,7 +8,7 @@ public class Actor {
 	private String firstName;
 	private String lastName;
 	
-	//private List<Film> films;
+	private List<Film> films;
 
 	public Actor() {
 		super();
@@ -43,6 +43,16 @@ public class Actor {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	
+
+	public List<Film> getFilms() {
+		return films;
+	}
+
+	public void setFilms(List<Film> films) {
+		this.films = films;
 	}
 
 	@Override
