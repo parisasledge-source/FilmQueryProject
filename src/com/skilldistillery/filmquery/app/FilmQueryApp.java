@@ -1,5 +1,6 @@
 package com.skilldistillery.filmquery.app;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class FilmQueryApp {
 	public static void main(String[] args) {
 		
 		FilmQueryApp app = new FilmQueryApp();
-		app.test();
+		//app.test();
 		app.launch();
 	}
 	
@@ -69,67 +70,78 @@ public class FilmQueryApp {
 	}
 
 	private void startUserInterface(Scanner input) {
+		
+		System.out.println();
+		System.out.println("**************************FILM QUERY**************************");
 
 		int menuInput = 0;
 		do {
-
 			// Prompt the user to choose from the menu.
 			System.out.println("\n");
-			System.out.println("Please choose between 1 to 3 from the menu:");
-			System.out.println("============================================");
+			System.out.println("Please choose between 1 to 3 to find information about a film:");
+			System.out.println("==============================================================");
+			System.out.println();
 			System.out.println("1: Look up a film by its id.");
 			System.out.println("2: Look up a film by a search keyword.");
 			System.out.println("3: Exit the application.");
 
-			menuInput = input.nextInt();
+			try {
+				menuInput = input.nextInt();
 
-			if (menuInput == 1) {
+				if (menuInput == 1) {
 
-				// Look up a film by its id.
-				System.out.println("\n");
-				System.out.println("Please enter film ID: ");
-				int filmId = input.nextInt();
-				System.out.println("======================");
+					// Look up a film by its id.
+					System.out.println("\n");
+					System.out.println("Enter film ID: ");
+					int filmId = input.nextInt();
+					System.out.println("================");
+					System.out.println();
+					
+					Film film = db.findFilmById(filmId);
+					System.out.println(film);
+					
+					String language = db.findLanguageByFilmId(filmId);
+					System.out.println(language);
 
-				Film film = db.findFilmById(filmId);
-				System.out.println(film);
-
-				String language = db.findLanguageByFilmId(4);
-				System.out.println(language);
-
-				for (Actor actors : film.getActors()) {
-					System.out.println(actors);
-				}
-
-			} else if (menuInput == 2) {
-
-				// Look up a film by a search keyword.
-				System.out.println("\n");
-				System.out.println("Please enter the keyword that you want to search: ");
-				String keyword = input.next();
-				System.out.println("==================================================");
-
-				List<Film> film2 = db.findFilmBySearchKeyword("SANTA");
-				for (Film b : film2) {
-					System.out.println(b.toString());
-					System.out.println(b.getLanguage());
-
-					for (Actor actors : b.getActors()) {
+					for (Actor actors : film.getActors()) {
 						System.out.println(actors);
 					}
-			
+
+				} else if (menuInput == 2) {
+
+					// Look up a film by a search keyword.
+					System.out.println("\n");
+					System.out.println("Enter a seach keyword: ");
+					String keyword = input.next();
+					System.out.println("========================");
 					System.out.println();
+					
+					List<Film> film2 = db.findFilmBySearchKeyword(keyword);
+					for (Film b : film2) {
+						System.out.println(b.toString());
+						System.out.println(b.getLanguage());
+
+						for (Actor actors : b.getActors()) {
+							System.out.println(actors);
+						}
+						System.out.println();
+					}
+					
+				} else if (menuInput == 3) {
+					// Exit the application.
+					System.out.println("\n");
+					System.out.println("You have chosen to exit the application.\nHave a nice day!");
+					// break;
+				} else {
+					// Message for invalid integer input.
+					System.out.println("\n");
+					System.out.println("Invalid number for menu option.");
 				}
-				
-			} else if (menuInput == 3) {
-				// Exit the application.
+			} catch (InputMismatchException e) {
+				// Message for invalid non integer input.
 				System.out.println("\n");
-				System.out.println("You have chosen to exit the application.\nHave a nice day!");
-				// break;
-			} else {
-				// Message for incorrect menu input.
-				System.out.println("\n");
-				System.out.println("Incorrect input for menu option.");
+				System.out.println("Invalid input for menu option.");
+				input.nextLine();// Clear input buffer
 			}
 
 		} while (menuInput != 3);
