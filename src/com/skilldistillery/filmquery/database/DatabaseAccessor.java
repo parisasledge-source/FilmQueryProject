@@ -16,5 +16,4 @@ public interface DatabaseAccessor {
 
 	public List<Film> findFilmBySearchKeyword(String keyword);
 
-	//public Film findFilmByText(String text);
 }

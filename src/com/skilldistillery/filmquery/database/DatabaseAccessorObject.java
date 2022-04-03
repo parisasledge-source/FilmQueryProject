@@ -54,55 +54,17 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		return film;
 	}
-//	@Override
-//	public Film findFilmByText(String text) {
-//		Film film = null;
-//		
-//		try {
-//			Connection conn = DriverManager.getConnection(URL, user, pass);
-//			String sql = "SELECT id, title, description, release_year, language_id,"
-//					+ " rental_duration, rental_rate, length, replacement_cost," + " rating, special_features "
-//					+ " FROM film WHERE title = ?";
-//			
-//			PreparedStatement stmt = conn.prepareStatement(sql);
-//			stmt.setString(1, text);
-//			ResultSet rs = stmt.executeQuery();
-//			if (rs.next()) {
-//				film = new Film();
-//				film.setId(rs.getInt(1));
-//				film.setTitle(rs.getString("title"));
-//				film.setDescription(rs.getString("description"));
-//				film.setReleaseYear(rs.getInt("release_year"));
-//				film.setLanguageID(rs.getInt("language_id"));
-//				film.setRentalDuration(rs.getInt("rental_duration"));
-//				film.setRantalRate(rs.getDouble("rental_rate"));
-//				film.setLength(rs.getInt("length"));
-//				film.setReplacementCost(rs.getDouble("replacement_cost"));
-//				film.setRating(rs.getString("rating"));
-//				film.setSpecialFeatures(rs.getString("special_features"));
-//				film.setActors2(findFilmBySearchKeyword(text));
-//			}
-//			rs.close();
-//			stmt.close();
-//			conn.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return film;
-//	}
-
 
 	@Override
 	public List<Film> findFilmBySearchKeyword(String keyword) {
 		// TODO Auto-generated method stub
 		List<Film> films = new ArrayList<>();
 		// TODO: Actor query for film ID
-		
+
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			String sql = "SELECT id, title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features FROM film WHERE title LIKE ? OR description LIKE ?;";
-			
+
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, "%" + keyword + "%");
 			stmt.setString(2, "%" + keyword + "%");
@@ -123,7 +85,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setActors(findActorsByFilmId(film.getId()));
 				film.setLanguage(findLanguageByFilmId(film.getId()));
 				films.add(film);
-
 			}
 			rs.close();
 			stmt.close();
@@ -131,10 +92,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return films;
 	}
-	
+
 	@Override
 	public Actor findActorById(int actorId) {
 		// TODO Auto-generated method stub
@@ -152,7 +113,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				actor.setId(rs.getInt("id"));
 				actor.setFirstName(rs.getString("first_name"));
 				actor.setLastName(rs.getString("last_name"));
-
 			}
 			rs.close();
 			stmt.close();
@@ -232,6 +192,4 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			throw new RuntimeException("Unable to load MySQL driver class");
 		}
 	}
-
-
 }

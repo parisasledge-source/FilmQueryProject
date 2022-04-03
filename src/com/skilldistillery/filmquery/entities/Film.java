@@ -16,17 +16,16 @@ public class Film {
 	private String rating;
 	private String specialFeatures;
 	private String language;
-	
+
 	private List<Actor> actors;
-	
-	
+
 	public Film() {
 		super();
 	}
 
-	public Film(int id, String title, String description, int releaseYear, int languageID, int rentalDuration,
-			Double rantalRate, int length, double replacementCost, String rating, String specialFeatures, String language,
-			List<Film> films) {
+	public Film(int id, String title, String description, Integer releaseYear, int languageID, int rentalDuration,
+			double rantalRate, Integer length, double replacementCost, String rating, String specialFeatures,
+			String language, List<Film> films) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -39,7 +38,7 @@ public class Film {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
-		this.language =language;
+		this.language = language;
 	}
 
 	public int getId() {
@@ -66,11 +65,11 @@ public class Film {
 		this.description = description;
 	}
 
-	public int getReleaseYear() {
+	public Integer getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(int releaseYear) {
+	public void setReleaseYear(Integer releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
@@ -90,19 +89,19 @@ public class Film {
 		this.rentalDuration = rentalDuration;
 	}
 
-	public Double getRantalRate() {
+	public double getRantalRate() {
 		return rantalRate;
 	}
 
-	public void setRantalRate(Double rantalRate) {
+	public void setRantalRate(double rantalRate) {
 		this.rantalRate = rantalRate;
 	}
 
-	public int getLength() {
+	public Integer getLength() {
 		return length;
 	}
 
-	public void setLength(int length) {
+	public void setLength(Integer length) {
 		this.length = length;
 	}
 
@@ -130,8 +129,6 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 	}
 
-	
-
 	public List<Actor> getActors() {
 		return actors;
 	}
@@ -139,8 +136,6 @@ public class Film {
 	public void setActors(List<Actor> actors) {
 		this.actors = actors;
 	}
-	
-	
 
 	public String getLanguage() {
 		return language;
@@ -148,18 +143,6 @@ public class Film {
 
 	public void setLanguage(String language) {
 		this.language = language;
-	}
-
-	public void setReleaseYear(Integer releaseYear) {
-		this.releaseYear = releaseYear;
-	}
-
-	public void setRantalRate(double rantalRate) {
-		this.rantalRate = rantalRate;
-	}
-
-	public void setLength(Integer length) {
-		this.length = length;
 	}
 
 	@Override
@@ -190,10 +173,4 @@ public class Film {
 				.append(specialFeatures).append("]");
 		return builder.toString();
 	}
-
-//	public void setActors2(List<Film> findFilmBySearchKeyword) {
-//		// TODO Auto-generated method stub
-//		this.actors = actors;
-//	}
-
 }
