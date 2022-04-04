@@ -57,9 +57,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	@Override
 	public List<Film> findFilmBySearchKeyword(String keyword) {
-		// TODO Auto-generated method stub
+		
 		List<Film> films = new ArrayList<>();
-		// TODO: Actor query for film ID
 
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -69,9 +68,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setString(1, "%" + keyword + "%");
 			stmt.setString(2, "%" + keyword + "%");
 			ResultSet rs = stmt.executeQuery();
-			boolean foundFilm = false;
+			//boolean noMatching = false;
 			while (rs.next()) {
-				foundFilm = true;
+				//noMatching = true;
 				Film film = new Film();
 				film.setId(rs.getInt("id"));
 				film.setTitle(rs.getString("title"));
@@ -88,9 +87,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setLanguage(findLanguageByFilmId(film.getId()));
 				films.add(film);
 			}
-			if(!foundFilm) {
-				System.out.println("No matching films are found!");
-			}
+			//if(!noMatching) {
+				//System.out.println("No matching films are found!");
+			//}
 			rs.close();
 			stmt.close();
 			conn.close();

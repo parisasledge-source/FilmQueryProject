@@ -101,9 +101,13 @@ public class FilmQueryApp {
 						//System.out.println("Invalid film ID. n\Please enter another film ID.");
 						System.out.println("The film is not found!");
 					}else {
+						System.out.println("The film is found! \n");
 						
 						Film film = db.findFilmById(filmId);
-						System.out.println(film);
+						System.out.println("Title: " + film.getTitle() + 
+								"\nRelease Year: " + film.getReleaseYear() + 
+								"\nRating: " + film.getRating() + 
+								"\nDescription: " + film.getDescription());
 						
 						String language = db.findLanguageByFilmId(filmId);
 						System.out.println(language);
@@ -123,15 +127,25 @@ public class FilmQueryApp {
 					System.out.println();
 					
 					List<Film> film2 = db.findFilmBySearchKeyword(keyword);
-			
+					
+					
+					boolean matching = false;
 					for (Film requestedFilms : film2) {
-						System.out.println(requestedFilms);
+						matching = true;
+						System.out.println("Matching film: \n");	
+						System.out.println("Title: " + requestedFilms.getTitle() + 
+								"\nRelease Year: " + requestedFilms.getReleaseYear() + 
+								"\nRating: " + requestedFilms.getRating() + 
+								"\nDescription: " + requestedFilms.getDescription());
 						System.out.println(requestedFilms.getLanguage());
 
 						for (Actor actors : requestedFilms.getActors()) {
 							System.out.println(actors);
 						}
 						System.out.println();
+					}
+					if(!matching) {
+						System.out.println("No matching films are found!");
 					}
 					
 				} else if (menuInput == 3) {
@@ -147,7 +161,7 @@ public class FilmQueryApp {
 			} catch (InputMismatchException e) {
 				// Message for invalid non integer input.
 				System.out.println("\n");
-				System.out.println("Invalid input for menu option!");
+				System.out.println("Invalid input!");
 				input.nextLine();// Clear input buffer
 			}
 
