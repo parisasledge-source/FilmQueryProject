@@ -21,14 +21,14 @@ In case the option 1 is chosen, if the user enters a number which is not an exis
 
 In case the option 2 is chosen, if the user enters a search keyword which is not in any of film titles or descriptions, they will see a message saying "No matching films are found!". But if the user enters a search keyword which is in one or more of film titles or descriptions, they will see a message saying "Matching films found!", and then they will see a list of films for which the search term was found anywhere in the title or description, with each film displayed with its title, year, rating, description, language, and the list of actors in its cast  are displayed.
 
-### Technologies used
+### Technologies Used & Lessons Learned
 
-MAMP and using localhost
-Connection to SQL using DriverManager
-Creating PreparedStatement object to pass sql data
-Creating ResultSet object
-Maven Dependancies
-Proper use of DatabaseAccessor interface and DatabaseAccessor implementer class
-Practicing more use of setters and getters in Film and Actor classes
-Practicing more use of menu option and handling InputMismatchException
-Use of static initializer block
+1. MAMP and using localhost
+2. Connection to SQL using DriverManager
+3. Creating PreparedStatement object to pass sql data
+4. Creating ResultSet object
+5. Maven Dependancies
+6. Proper use of DatabaseAccessor interface and DatabaseAccessor implementer class
+7. Practicing more use of setters and getters in Film and Actor classes
+8. Practicing more use of menu option and handling InputMismatchException
+9. Use of static initializer block
