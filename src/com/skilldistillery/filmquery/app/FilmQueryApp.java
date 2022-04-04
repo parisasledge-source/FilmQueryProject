@@ -14,12 +14,12 @@ public class FilmQueryApp {
 	DatabaseAccessor db = new DatabaseAccessorObject();
 
 	public static void main(String[] args) {
-		
+
 		FilmQueryApp app = new FilmQueryApp();
-		//app.test();
+		// app.test();
 		app.launch();
 	}
-	
+
 	// =======================Test Method================================
 	private void test() {
 		// =======================Test by Id=============================
@@ -42,7 +42,7 @@ public class FilmQueryApp {
 		// System.out.println("Double Check:");
 		// System.out.println(film.getActors());
 		System.out.println();
-		
+
 		// =======================Test by Keyword=============================
 		List<Film> film2 = db.findFilmBySearchKeyword("SANTA");
 		for (Film b : film2) {
@@ -52,13 +52,13 @@ public class FilmQueryApp {
 			for (Actor actors : b.getActors()) {
 				System.out.println(actors);
 			}
-			//System.out.println("Double Check:");
-			//System.out.println(b.getActors());
+			// System.out.println("Double Check:");
+			// System.out.println(b.getActors());
 			System.out.println();
 
 		}
 	}
-	
+
 	// =======================Launch Method================================
 
 	private void launch() {
@@ -70,7 +70,7 @@ public class FilmQueryApp {
 	}
 
 	private void startUserInterface(Scanner input) {
-		
+
 		System.out.println();
 		System.out.println("**************************FILM QUERY**************************");
 
@@ -96,24 +96,23 @@ public class FilmQueryApp {
 					int filmId = input.nextInt();
 					System.out.println("================");
 					System.out.println();
-					
+
 					if (db.findFilmById(filmId) == null) {
-						//System.out.println("Invalid film ID. n\Please enter another film ID.");
+
 						System.out.println("The film is not found!");
-					}else {
+					} else {
 						System.out.println("The film is found! \n");
-						
+
 						Film film = db.findFilmById(filmId);
-						System.out.println("Title: " + film.getTitle() + 
-								"\nRelease Year: " + film.getReleaseYear() + 
-								"\nRating: " + film.getRating() + 
-								"\nDescription: " + film.getDescription());
-						
+						System.out.println("Title: " + film.getTitle() + "\nRelease Year: " + film.getReleaseYear()
+								+ "\nRating: " + film.getRating() + "\nDescription: " + film.getDescription());
+
 						String language = db.findLanguageByFilmId(filmId);
-						System.out.println(language);
+						System.out.println("Language: " + language);
 						
+						System.out.println("\nThe cast:\n");
 						for (Actor actors : film.getActors()) {
-							System.out.println(actors);
+							System.out.println(actors.getFirstName() + " " + actors.getLastName());
 						}
 					}
 
@@ -125,41 +124,41 @@ public class FilmQueryApp {
 					String keyword = input.next();
 					System.out.println("========================");
 					System.out.println();
-					
+
 					List<Film> film2 = db.findFilmBySearchKeyword(keyword);
-					
-					
+
 					boolean matching = false;
 					for (Film requestedFilms : film2) {
 						matching = true;
-						System.out.println("Matching film: \n");	
-						System.out.println("Title: " + requestedFilms.getTitle() + 
-								"\nRelease Year: " + requestedFilms.getReleaseYear() + 
-								"\nRating: " + requestedFilms.getRating() + 
-								"\nDescription: " + requestedFilms.getDescription());
-						System.out.println(requestedFilms.getLanguage());
+						System.out.println("Matching film: \n");
 
+						System.out.println("Title: " + requestedFilms.getTitle() + "\nRelease Year: "
+								+ requestedFilms.getReleaseYear() + "\nRating: " + requestedFilms.getRating()
+								+ "\nDescription: " + requestedFilms.getDescription());
+						System.out.println("Language: " + requestedFilms.getLanguage());
+
+						System.out.println("\nThe cast:\n");
 						for (Actor actors : requestedFilms.getActors()) {
-							System.out.println(actors);
+							System.out.println(actors.getFirstName() + " " + actors.getLastName());
 						}
 						System.out.println();
 					}
-					if(!matching) {
+					if (!matching) {
 						System.out.println("No matching films are found!");
 					}
-					
+
 				} else if (menuInput == 3) {
 					// Exit the application.
 					System.out.println("\n");
 					System.out.println("You have chosen to exit the application.\nHave a nice day!");
 					// break;
 				} else {
-					// Message for invalid integer input.
+					// Message for invalid number.
 					System.out.println("\n");
 					System.out.println("Invalid number for menu option!");
 				}
 			} catch (InputMismatchException e) {
-				// Message for invalid non integer input.
+				// Message for invalid input.
 				System.out.println("\n");
 				System.out.println("Invalid input!");
 				input.nextLine();// Clear input buffer
