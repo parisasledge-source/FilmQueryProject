@@ -27,20 +27,12 @@ public class FilmQueryApp {
 		film = db.findFilmById(4);
 		System.out.println(film);
 
-		// Actor actor = db.findActorById(2);
-		// System.out.println(actor);
-
-		// List<Actor> actors = db.findActorsByFilmId(2);
-		// System.out.println(film.getActors());
-
 		String language = db.findLanguageByFilmId(4);
 		System.out.println(language);
 
 		for (Actor actors : film.getActors()) {
 			System.out.println(actors);
 		}
-		// System.out.println("Double Check:");
-		// System.out.println(film.getActors());
 		System.out.println();
 
 		// =======================Test by Keyword=============================
@@ -52,10 +44,7 @@ public class FilmQueryApp {
 			for (Actor actors : b.getActors()) {
 				System.out.println(actors);
 			}
-			// System.out.println("Double Check:");
-			// System.out.println(b.getActors());
 			System.out.println();
-
 		}
 	}
 
