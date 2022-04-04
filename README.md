@@ -26,9 +26,9 @@ In case the option 2 is chosen, if the user enters a search keyword which is not
 1. MAMP and using localhost
 2. Connection to SQL using DriverManager
 3. Creating PreparedStatement object to pass sql data
-4. Creating ResultSet object
+4. Creating ResultSet
 5. Maven Dependancies
-6. Proper use of DatabaseAccessor interface and DatabaseAccessor implementer class
+6. Proper use of DatabaseAccessor interface and DatabaseAccessorObject implementer class
 7. Practicing more use of setters and getters in Film and Actor classes
 8. Practicing more use of menu option and handling InputMismatchException
 9. Use of static initializer block
