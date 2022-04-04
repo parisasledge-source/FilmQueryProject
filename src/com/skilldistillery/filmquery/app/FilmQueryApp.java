@@ -92,36 +92,43 @@ public class FilmQueryApp {
 
 					// Look up a film by its id.
 					System.out.println("\n");
-					System.out.println("Enter film ID: ");
+					System.out.println("Enter the film ID: ");
 					int filmId = input.nextInt();
 					System.out.println("================");
 					System.out.println();
 					
-					Film film = db.findFilmById(filmId);
-					System.out.println(film);
-					
-					String language = db.findLanguageByFilmId(filmId);
-					System.out.println(language);
-
-					for (Actor actors : film.getActors()) {
-						System.out.println(actors);
+					if (db.findFilmById(filmId) == null) {
+						//System.out.println("Invalid film ID. n\Please enter another film ID.");
+						System.out.println("The film is not found!");
+					}else {
+						
+						Film film = db.findFilmById(filmId);
+						System.out.println(film);
+						
+						String language = db.findLanguageByFilmId(filmId);
+						System.out.println(language);
+						
+						for (Actor actors : film.getActors()) {
+							System.out.println(actors);
+						}
 					}
 
 				} else if (menuInput == 2) {
 
 					// Look up a film by a search keyword.
 					System.out.println("\n");
-					System.out.println("Enter a seach keyword: ");
+					System.out.println("Enter the seach keyword: ");
 					String keyword = input.next();
 					System.out.println("========================");
 					System.out.println();
 					
 					List<Film> film2 = db.findFilmBySearchKeyword(keyword);
-					for (Film b : film2) {
-						System.out.println(b.toString());
-						System.out.println(b.getLanguage());
+			
+					for (Film requestedFilms : film2) {
+						System.out.println(requestedFilms);
+						System.out.println(requestedFilms.getLanguage());
 
-						for (Actor actors : b.getActors()) {
+						for (Actor actors : requestedFilms.getActors()) {
 							System.out.println(actors);
 						}
 						System.out.println();
@@ -135,12 +142,12 @@ public class FilmQueryApp {
 				} else {
 					// Message for invalid integer input.
 					System.out.println("\n");
-					System.out.println("Invalid number for menu option.");
+					System.out.println("Invalid number for menu option!");
 				}
 			} catch (InputMismatchException e) {
 				// Message for invalid non integer input.
 				System.out.println("\n");
-				System.out.println("Invalid input for menu option.");
+				System.out.println("Invalid input for menu option!");
 				input.nextLine();// Clear input buffer
 			}
 

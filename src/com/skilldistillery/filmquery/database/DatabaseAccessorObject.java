@@ -69,7 +69,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setString(1, "%" + keyword + "%");
 			stmt.setString(2, "%" + keyword + "%");
 			ResultSet rs = stmt.executeQuery();
+			boolean foundFilm = false;
 			while (rs.next()) {
+				foundFilm = true;
 				Film film = new Film();
 				film.setId(rs.getInt("id"));
 				film.setTitle(rs.getString("title"));
@@ -85,6 +87,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setActors(findActorsByFilmId(film.getId()));
 				film.setLanguage(findLanguageByFilmId(film.getId()));
 				films.add(film);
+			}
+			if(!foundFilm) {
+				System.out.println("No matching films are found!");
 			}
 			rs.close();
 			stmt.close();
